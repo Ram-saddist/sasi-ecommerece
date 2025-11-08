@@ -1,0 +1,51 @@
+/* Make the app take full viewport */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Page container (creates a stacking context above the fixed layers) */
+.home-page {
+  position: relative;
+  min-height: 100vh;
+  z-index: 2; /* content above particles/bg */
+}
+
+/* Fixed background image that covers the entire page (all screens) */
+.home-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1; /* lowest layer */
+  background-image: url('https://img.freepik.com/free-photo/abstract-dark-background-with-flowing-colouful-waves_1048-13124.jpg?semt=ais_hybrid&w=740&q=80'); /* <-- put your image here */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: none; /* tweak if you want blur: blur(2px) */
+}
+
+/* Particles are full-screen & fixed (set via options fullScreen.zIndex = 1) */
+/* No CSS needed for the canvas; the library injects it. */
+
+/* Foreground content sections */
+.home-hero {
+  padding: 120px 20px 60px;   /* space from top; your fixed navbar stays visible */
+  color: #fff;
+  text-align: left;
+}
+.home-hero h1 {
+  margin: 0;
+  font-size: clamp(32px, 6vw, 64px);
+  line-height: 1.1;
+  font-weight: 800;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+
+.home-section {
+  padding: 60px 20px 100px;
+  color: #fff;
+  max-width: 1000px;
+}
+
+/* If your global .after-nav padding is used, this still works together.
+   The hero has extra padding-top so the title doesn't collide with the pill navbar. */

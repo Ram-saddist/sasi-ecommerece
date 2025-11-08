@@ -11,14 +11,16 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/register" element={<Register />} />  
-        <Route path="/admin/add-product" element={<AdminAddProduct />} />
-      </Routes>
+      <div className="after-nav">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admin/add-product" element={<AdminAddProduct />} />
+        </Routes>
+      </div>
     </Router>
   )
 }

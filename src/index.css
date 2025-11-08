@@ -1,0 +1,18 @@
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Push page content below the fixed navbar */
+.after-nav{
+  padding-top: calc(var(--nav-height) + 16px); /* +gap below the pill */
+}
+
+
+/* If you want a slightly tighter mobile spacing: */
+@media (max-width: 900px){
+  .after-nav{ padding-top: calc(var(--nav-height) + 12px); }
+}
