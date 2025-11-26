@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { auth } from "../firebase/config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import "./Navbar.css";
-
 export default function NavbarComponent() {
   const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
@@ -37,8 +36,11 @@ export default function NavbarComponent() {
         {/* LEFT: Logo (ELCS always visible) */}
         <div className="nav-left">
           <Link to="/" className="nav-logo" aria-label="ELCS Home">
-            <span className="logo-mark">E</span>
-            <span className="logo-text">ELCS</span>
+            <img
+              src="/images/final_elcs_logo_clean.png"
+              alt="ELCS Logo"
+              style={{ height: "75px", width: "auto", borderRadius: "10px" }}
+            /> 
           </Link>
         </div>
 

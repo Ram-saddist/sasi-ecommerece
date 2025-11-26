@@ -1,18 +1,29 @@
-body, html, #root {
-  margin: 0;
+html, body, #root {
   padding: 0;
-  height: 100%;
+  margin: 0;
   width: 100%;
-  overflow: hidden;
+  height: 100%;
+  overflow-y: auto; /* allow scrolling (was hidden previously) */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Push page content below the fixed navbar */
-.after-nav{
-  padding-top: calc(var(--nav-height) + 16px); /* +gap below the pill */
+/* Utility if you use a top fixed nav */
+.after-nav {
+  padding-top: calc(var(--nav-height) + 16px);
+}
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  flex: 1; /* pushes footer to bottom */
+  display: flex;
+  flex-direction: column;
 }
 
 
-/* If you want a slightly tighter mobile spacing: */
 @media (max-width: 900px){
-  .after-nav{ padding-top: calc(var(--nav-height) + 12px); }
+  .after-nav { padding-top: calc(var(--nav-height) + 12px); }
 }

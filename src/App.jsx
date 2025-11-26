@@ -6,23 +6,30 @@ import Navbar from './components/Navbar'
 import Profile from './pages/Profile'; 
 import Register from './pages/Register';
 import AdminAddProduct from './pages/AdminAddProduct';
+import Footer from './components/Footer'
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <div className="after-nav">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/admin/add-product" element={<AdminAddProduct />} />
-        </Routes>
+      <div className="app-container">
+        <Navbar />
+
+        <div className="after-nav" style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/admin/add-product" element={<AdminAddProduct />} />
+          </Routes>
+        </div>
+
+        <Footer />
       </div>
     </Router>
-  )
+  );
 }
+
 
 export default App

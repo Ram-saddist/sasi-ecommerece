@@ -1,0 +1,20 @@
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+
+.footer-shadow {
+  box-shadow: 0 -10px 25px rgba(0,0,0,0.25);
+}
+
+.sales-bars .bar {
+  width: 32px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  padding-bottom: 4px;
+}
