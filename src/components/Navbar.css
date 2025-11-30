@@ -94,6 +94,7 @@ ul{
 .nav-right{
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
 }
 .desktop-only{ display: inline-flex; } /* hidden on mobile later */

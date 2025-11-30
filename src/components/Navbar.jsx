@@ -37,9 +37,9 @@ export default function NavbarComponent() {
         <div className="nav-left">
           <Link to="/" className="nav-logo" aria-label="ELCS Home">
             <img
-              src="/images/final_elcs_logo_clean.png"
+              src="/images/ELCS_final_logo.png"
               alt="ELCS Logo"
-              style={{ height: "75px", width: "auto", borderRadius: "10px" }}
+              style={{ height: "55px", width: "auto", borderRadius: "10px" }}
             /> 
           </Link>
         </div>

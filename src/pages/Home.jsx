@@ -113,11 +113,11 @@ export default function Home() {
 
       {/* Care section - example data/cards */}
       <section className="home-section" id="care">
-        <div className="container">
+        <div className="container-fluid">
           <div className="row justify-content-center text-center">
-            <div className="col-lg-12 col-md-10">
+            <div className="col-md-10">
               <img
-                src="/images/infographic-template-pack.png"  // <-- place your image in public/images/
+                src="/images/infographic.png"  // <-- place your image in public/images/
                 alt="Centered Display"
                 className="img-fluid rounded shadow"
               />
@@ -128,14 +128,13 @@ export default function Home() {
 
       {/* More page content */}
       <section className="home-section">
-        <h2>More Content</h2>
-        <p>
-          Add more sections here. The background image stays fixed while the hero particles
-          are limited to the top area.
-        </p>
-        <p>
-          Scroll to see the Care section and the rest of your page — particles won't cover these.
-        </p>
+        <div className="container-fluid">
+          <div className="row justify-content-center text-center">
+            <h2>Partnered with</h2>
+            <p>coming soon...</p>
+          </div>
+        </div>
+
       </section>
     </div>
   );

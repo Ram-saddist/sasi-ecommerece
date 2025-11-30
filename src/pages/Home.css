@@ -2,7 +2,7 @@
 .home-page {
   position: relative;
   min-height: 100vh;
-  z-index: 2;
+  
 }
 
 /* Fixed background image that covers the entire page (all screens) */
@@ -72,11 +72,11 @@
 .home-section {
   padding: 60px 20px 100px;
   color: #fff;
-  max-width: 1000px;
+  
   margin: 0 auto;
 }
 #care img{
-  max-width: 2500px; 
+  max-width: 1500px; 
   width: 100%
 }
 
