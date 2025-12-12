@@ -30,7 +30,7 @@ export default function Home() {
               particlesLoaded={particlesLoaded}
               className="home-particles"
               options={{
-                fullScreen: { enable: false }, // do not use fullPage canvas
+                fullScreen: { enable: true }, // do not use fullPage canvas
                 background: { color: { value: "transparent" } },
                 fpsLimit: 60,
                 detectRetina: true,

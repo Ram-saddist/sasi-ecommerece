@@ -10,7 +10,7 @@
   position: fixed;
   inset: 0;
   z-index: -1; /* lowest layer */
-  background-image: url('https://img.freepik.com/free-photo/abstract-dark-background-with-flowing-colouful-waves_1048-13124.jpg?semt=ais_hybrid&w=740&q=80');
+  background-image: url('/images/about-background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -56,7 +56,7 @@
 .particles-wrapper {
   position: absolute;
   inset: 0;
-  z-index: 1; /* sits above background but under the hero content */
+  z-index: -1; /* sits above background but under the hero content */
   pointer-events: none; /* let clicks pass to hero content */
 }
 
