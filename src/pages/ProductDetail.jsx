@@ -1,39 +1,8 @@
 import React, { useState } from 'react'
-import './ITTalk.css'
+import { useParams, useNavigate } from 'react-router-dom'
+import './ProductDetail.css'
 
 const demoProducts = [
-  {
-    id: 9,
-    name: "Voltage Divider Calculator",
-    title: "Voltage Divider Calculator – Formula, Theory & Online Tool",
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=600&fit=crop",
-    description: "Interactive voltage divider calculator tool. Calculate output voltage, input voltage, or resistor values using the standard voltage divider formula.",
-    fullDescription: "A voltage divider is a simple and widely used electronic circuit that reduces a higher input voltage to a lower output voltage using two resistors connected in series.",
-    theory: {
-      whatIs: "A voltage divider is a simple and widely used electronic circuit that reduces a higher input voltage to a lower output voltage using two resistors connected in series.",
-      commonUses: [
-        "Signal level reduction",
-        "ADC input scaling (microcontrollers)",
-        "Sensor interfacing",
-        "Reference voltage generation"
-      ],
-      howItWorks: [
-        "In a voltage divider, the same current flows through both resistors because they are in series.",
-        "The voltage drop across each resistor depends on its resistance value.",
-        "Higher resistance → higher voltage drop",
-        "Lower resistance → lower voltage drop",
-        "By choosing proper resistor values, we can get the desired output voltage."
-      ],
-      formulaVariables: [
-        { symbol: "Vin", description: "Input Voltage (V)" },
-        { symbol: "Vout", description: "Output Voltage (V)" },
-        { symbol: "R1, R2", description: "Resistor values (Ω)" }
-      ]
-    },
-    features: ["Calculate Vout from Vin, R1, R2", "Calculate Vin from Vout, R1, R2", "Calculate R1 from Vin, Vout, R2", "Calculate R2 from Vin, Vout, R1", "Real-time calculation"],
-    specifications: { "Formula": "Vout = Vin × (R2 / (R1 + R2))", "Inputs": "Vin, R1, R2, Vout", "Output": "Unknown value", "Precision": "Up to 6 decimal places", "Units": "Volts, Ohms" },
-    hasCalculator: true
-  },
   {
     id: 1,
     name: "Embedded Controller Module",
@@ -105,6 +74,16 @@ const demoProducts = [
     fullDescription: "The Display Interface Module simplifies adding visual displays to your projects. It supports character LCDs, graphic OLEDs, and color TFT panels up to 800x480 resolution. The onboard graphics controller handles display refresh, freeing your main processor for other tasks. Integrated touchscreen controller supports both resistive and capacitive touch panels. The included graphics library provides drawing primitives, fonts, and image rendering functions.",
     features: ["Multiple display types", "Up to 800x480 resolution", "Touch support (resistive/capacitive)", "Graphics acceleration", "Comprehensive library"],
     specifications: { "Max Resolution": "800x480", "Color Depth": "16-bit (65K colors)", "Touch": "Resistive & Capacitive", "Interface": "SPI, I2C, Parallel", "Backlight": "PWM dimmable" }
+  },
+  {
+    id: 9,
+    name: "Voltage Divider Calculator",
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=600&fit=crop",
+    description: "Interactive voltage divider calculator tool. Calculate output voltage, input voltage, or resistor values using the standard voltage divider formula.",
+    fullDescription: "The Voltage Divider Calculator is an essential tool for electronics engineers and hobbyists. A voltage divider is a simple circuit that produces an output voltage (Vout) that is a fraction of the input voltage (Vin). It uses two resistors (R1 and R2) in series. The formula is: Vout = Vin × (R2 / (R1 + R2)). This calculator allows you to solve for any unknown value when you know the other three parameters.",
+    features: ["Calculate Vout from Vin, R1, R2", "Calculate Vin from Vout, R1, R2", "Calculate R1 from Vin, Vout, R2", "Calculate R2 from Vin, Vout, R1", "Real-time calculation"],
+    specifications: { "Formula": "Vout = Vin × (R2 / (R1 + R2))", "Inputs": "Vin, R1, R2, Vout", "Output": "Unknown value", "Precision": "Up to 6 decimal places", "Units": "Volts, Ohms" },
+    hasCalculator: true
   }
 ]
 
@@ -114,38 +93,17 @@ function VoltageDividerCalculator() {
   const [r1, setR1] = useState('')
   const [r2, setR2] = useState('')
   const [vout, setVout] = useState('')
-  const [r1Unit, setR1Unit] = useState('Ω')
-  const [r2Unit, setR2Unit] = useState('Ω')
-  const [resultUnit, setResultUnit] = useState('Ω')
   const [solveFor, setSolveFor] = useState('vout')
   const [result, setResult] = useState(null)
   const [error, setError] = useState('')
-
-  // Convert resistance to Ohms based on unit
-  const toOhms = (value, unit) => {
-    switch (unit) {
-      case 'kΩ': return value * 1000
-      case 'MΩ': return value * 1000000
-      default: return value
-    }
-  }
-
-  // Convert Ohms to selected unit
-  const fromOhms = (value, unit) => {
-    switch (unit) {
-      case 'kΩ': return value / 1000
-      case 'MΩ': return value / 1000000
-      default: return value
-    }
-  }
 
   const calculate = () => {
     setError('')
     setResult(null)
 
     const vinVal = parseFloat(vin)
-    const r1Val = toOhms(parseFloat(r1), r1Unit)
-    const r2Val = toOhms(parseFloat(r2), r2Unit)
+    const r1Val = parseFloat(r1)
+    const r2Val = parseFloat(r2)
     const voutVal = parseFloat(vout)
 
     try {
@@ -314,21 +272,14 @@ function VoltageDividerCalculator() {
         {solveFor !== 'r1' && (
           <div className="input-group">
             <label>Resistor 1 (R1)</label>
-            <div className="input-with-unit has-select">
+            <div className="input-with-unit">
               <input
                 type="number"
                 value={r1}
                 onChange={(e) => setR1(e.target.value)}
                 placeholder="Enter resistance"
               />
-              <select
-                value={r1Unit}
-                onChange={(e) => setR1Unit(e.target.value)}
-              >
-                <option value="Ω">Ω</option>
-                <option value="kΩ">kΩ</option>
-                <option value="MΩ">MΩ</option>
-              </select>
+              <span className="unit">Ω</span>
             </div>
           </div>
         )}
@@ -336,21 +287,14 @@ function VoltageDividerCalculator() {
         {solveFor !== 'r2' && (
           <div className="input-group">
             <label>Resistor 2 (R2)</label>
-            <div className="input-with-unit has-select">
+            <div className="input-with-unit">
               <input
                 type="number"
                 value={r2}
                 onChange={(e) => setR2(e.target.value)}
                 placeholder="Enter resistance"
               />
-              <select
-                value={r2Unit}
-                onChange={(e) => setR2Unit(e.target.value)}
-              >
-                <option value="Ω">Ω</option>
-                <option value="kΩ">kΩ</option>
-                <option value="MΩ">MΩ</option>
-              </select>
+              <span className="unit">Ω</span>
             </div>
           </div>
         )}
@@ -388,130 +332,76 @@ function VoltageDividerCalculator() {
   )
 }
 
-export default function ITTalk() {
-  const [selectedProduct, setSelectedProduct] = useState(demoProducts[0])
+export default function ProductDetail() {
+  const { id } = useParams()
+  const navigate = useNavigate()
+
+  const product = demoProducts.find(p => p.id === parseInt(id))
+
+  if (!product) {
+    return (
+      <div className="product-detail-container">
+        <div className="not-found">
+          <h2>Product Not Found</h2>
+          <button className="back-btn" onClick={() => navigate('/ittalk')}>
+            Back to Products
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div className="ittalk-container">
-      <div className="ittalk-header">
-        <h1>Our Products</h1>
-        <p>Explore our range of embedded systems and electronic modules</p>
-      </div>
+    <div className="product-detail-container">
+      <button className="back-btn" onClick={() => navigate('/ittalk')}>
+        &larr; Back to Products
+      </button>
 
-      <div className="ittalk-layout">
-        {/* Sidebar - Product Names */}
-        <div className="products-sidebar">
-          <div className="sidebar-title">Products</div>
-          <ul className="product-list">
-            {demoProducts.map((product) => (
-              <li
-                key={product.id}
-                className={`product-item ${selectedProduct.id === product.id ? 'active' : ''}`}
-                onClick={() => setSelectedProduct(product)}
-              >
-                {product.name}
-              </li>
-            ))}
-          </ul>
+      <div className="product-detail-content">
+        <div className="product-detail-image">
+          <img src={product.image} alt={product.name} />
         </div>
 
-        {/* Main Content - Product Details */}
-        <div className="product-detail-panel">
-          {/* Special layout for Voltage Divider Calculator */}
-          {selectedProduct.hasCalculator && selectedProduct.theory ? (
-            <>
-              <div className="calculator-header">
-                <h1>{selectedProduct.title}</h1>
-              </div>
+        <div className="product-detail-info">
+          <h1>{product.name}</h1>
+          <p className="product-full-description">{product.fullDescription}</p>
 
-              <div className="detail-image calculator-image">
-                <img src={selectedProduct.image} alt={selectedProduct.name} />
-              </div>
+          <div className="product-features">
+            <h3>Key Features</h3>
+            <ul>
+              {product.features.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </ul>
+          </div>
 
-              <div className="theory-section">
-                <h2>What is a Voltage Divider?</h2>
-                <p className="theory-intro">{selectedProduct.theory.whatIs}</p>
+          <div className="product-specifications">
+            <h3>Specifications</h3>
+            <table>
+              <tbody>
+                {Object.entries(product.specifications).map(([key, value]) => (
+                  <tr key={key}>
+                    <td className="spec-key">{key}</td>
+                    <td className="spec-value">{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-                <div className="common-uses">
-                  <h3>It is commonly used in:</h3>
-                  <ol>
-                    {selectedProduct.theory.commonUses.map((use, index) => (
-                      <li key={index}>{use}</li>
-                    ))}
-                  </ol>
-                </div>
-
-                <div className="how-it-works">
-                  <h3>How It Works</h3>
-                  <ul>
-                    {selectedProduct.theory.howItWorks.map((point, index) => (
-                      <li key={index}>{point}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="formula-section">
-                  <h3>Formula</h3>
-                  <div className="formula-box">
-                    <div className="formula-main">
-                      Vout = Vin × <span className="fraction"><span className="numerator">R2</span><span className="denominator">R1 + R2</span></span>
-                    </div>
-                  </div>
-                  <div className="formula-variables">
-                    <p><strong>Where:</strong></p>
-                    {selectedProduct.theory.formulaVariables.map((variable, index) => (
-                      <p key={index}><strong>{variable.symbol}</strong> = {variable.description}</p>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="calculator-section">
-                <VoltageDividerCalculator />
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="detail-image">
-                <img src={selectedProduct.image} alt={selectedProduct.name} />
-              </div>
-
-              <div className="detail-info">
-                <h2>{selectedProduct.name}</h2>
-                <p className="detail-description">{selectedProduct.fullDescription}</p>
-
-                <div className="detail-features">
-                  <h3>Key Features</h3>
-                  <ul>
-                    {selectedProduct.features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="detail-specifications">
-                  <h3>Specifications</h3>
-                  <table>
-                    <tbody>
-                      {Object.entries(selectedProduct.specifications).map(([key, value]) => (
-                        <tr key={key}>
-                          <td className="spec-key">{key}</td>
-                          <td className="spec-value">{value}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                <div className="detail-actions">
-                  <button className="contact-btn">Contact for Quote</button>
-                  <button className="download-btn">Download Datasheet</button>
-                </div>
-              </div>
-            </>
-          )}
+          <div className="product-actions">
+            <button className="contact-btn">Contact for Quote</button>
+            <button className="download-btn">Download Datasheet</button>
+          </div>
         </div>
       </div>
+
+      {/* Show Calculator if product has one */}
+      {product.hasCalculator && (
+        <div className="calculator-section">
+          <VoltageDividerCalculator />
+        </div>
+      )}
     </div>
   )
 }
