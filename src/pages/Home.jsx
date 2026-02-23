@@ -1,7 +1,45 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import "./Home.css";
+
+function PyramidSection() {
+  return (
+    <section className="home-section pyramid-section" id="care">
+
+      {/* Top - Connect */}
+      <div className="pyr-point pyr-top">
+        <h3>Connect</h3>
+        <p>Seamless connectivity solutions for embedded systems. We bridge devices, sensors, and platforms with reliable communication protocols and IoT integration.</p>
+      </div>
+
+      {/* Bottom row: Control - Pyramid - CareSure */}
+      <div className="pyramid-bottom-row">
+        <div className="pyr-point pyr-left">
+          <h3>Control</h3>
+          <p>Precision control systems for industrial automation. Our embedded controllers and smart modules deliver real-time performance for critical applications.</p>
+        </div>
+
+        {/* Rotating pyramid */}
+        <div className="pyramid-center">
+          <div className="pyramid-scene">
+            <div className="pyramid-3d">
+              <div className="pyr-face pyr-front" />
+              <div className="pyr-face pyr-back-left" />
+              <div className="pyr-face pyr-back-right" />
+            </div>
+          </div>
+        </div>
+
+        <div className="pyr-point pyr-right">
+          <h3>CareSure</h3>
+          <p>Complete support and quality assurance for every product. From documentation to technical support, we ensure reliability and peace of mind.</p>
+        </div>
+      </div>
+
+    </section>
+  )
+}
 
 export default function Home() {
   const [ready, setReady] = useState(false);
@@ -55,14 +93,9 @@ export default function Home() {
                 },
                 interactivity: {
                   events: {
-                    onHover: { enable: true, mode: "grab" },
-                    onClick: { enable: true, mode: "push" },
+                    onHover: { enable: false },
+                    onClick: { enable: false },
                     resize: true
-                  },
-                  modes: {
-                    grab: { distance: 140, links: { opacity: 0.8 } },
-                    push: { quantity: 3 },
-                    repulse: { distance: 120 }
                   }
                 }
               }}
@@ -111,20 +144,8 @@ export default function Home() {
 
       </section>
 
-      {/* Care section - example data/cards */}
-      <section className="home-section" id="care">
-        <div className="container-fluid">
-          <div className="row justify-content-center text-center">
-            <div className="col-md-10">
-              <img
-                src="/images/infographic.png"  // <-- place your image in public/images/
-                alt="Centered Display"
-                className="img-fluid rounded shadow"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Pyramid Section */}
+      <PyramidSection />
 
       {/* More page content */}
       <section className="home-section">

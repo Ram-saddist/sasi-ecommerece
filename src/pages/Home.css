@@ -52,12 +52,12 @@
   text-align: justify;
 }
 
-/* Particles wrapper sized to hero only */
+/* Particles wrapper - fullscreen mode, behind all content */
 .particles-wrapper {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  z-index: -1; /* sits above background but under the hero content */
-  pointer-events: none; /* let clicks pass to hero content */
+  z-index: -1;
+  pointer-events: none; /* don't capture mouse events */
 }
 
 /* The particles canvas will be inserted by the lib and should fill the wrapper */
@@ -75,15 +75,165 @@
   
   margin: 0 auto;
 }
-#care img{
-  max-width: 1500px; 
-  width: 100%
+/* ========== Pyramid Section ========== */
+.pyramid-section {
+  padding: 80px 20px 100px;
 }
 
-/* Responsive tweaks */
-@media (max-width: 900px){
+/* Top content - Connect */
+.pyr-top {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto 60px;
+}
+
+/* Bottom row: Control | Pyramid | CareSure */
+.pyramid-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pyr-left {
+  flex: 1;
+  text-align: right;
+  max-width: 320px;
+}
+
+.pyr-right {
+  flex: 1;
+  max-width: 320px;
+}
+
+/* ---- 3D Pyramid ---- */
+.pyramid-center {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.pyramid-scene {
+  width: 320px;
+  height: 250px;
+  perspective: 800px;
+  perspective-origin: 50% 40%;
+}
+
+.pyramid-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: pyrSpin 10s linear infinite;
+  transform-origin: 50% 100%;
+}
+
+@keyframes pyrSpin {
+  0% { transform: rotateX(-20deg) rotateY(0deg); }
+  100% { transform: rotateX(-20deg) rotateY(360deg); }
+}
+
+.pyr-face {
+  position: absolute;
+  bottom: 0;
+  left: -2px;
+  width: 0;
+  height: 0;
+  border-left: 162px solid transparent;
+  border-right: 162px solid transparent;
+  border-bottom: 252px solid;
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+}
+
+.pyr-front {
+  border-bottom-color: #00b482;
+  transform: rotateY(0deg) translateZ(93px) rotateX(20deg);
+}
+
+.pyr-back-left {
+  border-bottom-color: #1e64b4;
+  transform: rotateY(-120deg) translateZ(93px) rotateX(20deg);
+}
+
+.pyr-back-right {
+  border-bottom-color: #c87832;
+  transform: rotateY(120deg) translateZ(93px) rotateX(20deg);
+}
+
+
+/* ---- Content ---- */
+.pyr-point h3 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+.pyr-point p {
+  font-size: 1.15rem;
+  color: #e0e0e0;
+  line-height: 1.7;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Heading colors matching pyramid faces */
+.pyr-top h3 {
+  color: #00b482;
+}
+
+.pyr-left h3 {
+  color: #1e64b4;
+}
+
+.pyr-right h3 {
+  color: #c87832;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
   .home-hero {
     padding-top: calc(var(--nav-height, 64px) + 24px);
   }
   .hero-content { padding: 0 12px; }
+
+  .pyramid-bottom-row {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .pyr-left, .pyr-right {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .pyramid-scene {
+    width: 260px;
+    height: 210px;
+  }
+
+  .pyr-face {
+    border-left-width: 130px;
+    border-right-width: 130px;
+    border-bottom-width: 210px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pyramid-scene {
+    width: 220px;
+    height: 180px;
+  }
+
+  .pyr-face {
+    border-left-width: 110px;
+    border-right-width: 110px;
+    border-bottom-width: 180px;
+  }
+
+  .pyr-point h3 { font-size: 1.7rem; }
+  .pyr-point p { font-size: 1rem; }
 }

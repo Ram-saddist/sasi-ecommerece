@@ -1,8 +1,10 @@
-
-
-footer.css footer {
+/* Footer base styling */
+footer {
   position: relative;
   z-index: 1;
+  margin-top: auto !important;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0d0d1a 0%, #111827 100%) !important;
 }
 
 .footer-shadow {
