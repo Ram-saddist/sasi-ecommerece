@@ -2,11 +2,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { auth } from "../firebase/config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useCart } from "../context/CartContext";
 import "./Navbar.css";
 export default function NavbarComponent() {
   const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const { cartCount } = useCart();
 
   // Watch Firebase Auth state (only show verified users)
   useEffect(() => {
@@ -53,6 +55,10 @@ export default function NavbarComponent() {
 
         {/* RIGHT: Desktop CTA + Mobile Hamburger */}
         <div className="nav-right">
+          <Link to="/cart" className="cart-icon" aria-label="Cart">
+            🛒
+            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+          </Link>
           <Link to="/products" className="btn-primary desktop-only">Products</Link>
 
           {/* Mobile toggle on the far right */}

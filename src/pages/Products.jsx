@@ -3,13 +3,15 @@ import { db, auth } from "../firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [user, setUser] = useState(null);
-  const [cart, setCart] = useState([]);
+  const { addToCart } = useCart();
   const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (userData) => {
@@ -37,10 +39,8 @@ export default function Products() {
     }
   };
   const handleAddToCart = (product) => {
-    if (!cart.find((item) => item.id === product.id)) {
-      setCart([...cart, product]);
-      alert("Product added to cart!");
-    }
+    addToCart(product);
+    alert("Product added to cart!");
   };
   const handleDownload = (url) => {
     if (user) {
@@ -105,12 +105,6 @@ export default function Products() {
           </div>
         ))}
       </div>
-      {/* Optional: Simple cart summary */}
-      {cart.length > 0 && (
-        <div className="alert alert-info mt-4">
-          <strong>Cart:</strong> {cart.length} item(s) added
-        </div>
-      )}
-    </div>
+          </div>
   );
 }

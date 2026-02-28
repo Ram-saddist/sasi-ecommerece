@@ -3,9 +3,10 @@ import Home from './pages/Home'
 import Products from './pages/Products'
 import Login from './pages/Login'
 import Navbar from './components/Navbar'
-import Profile from './pages/Profile'; 
+import Profile from './pages/Profile';
 import Register from './pages/Register';
 import AdminAddProduct from './pages/AdminAddProduct';
+import Cart from './pages/Cart';
 import Footer from './components/Footer'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/register" element={<Register />} />
             <Route path="/admin/add-product" element={<AdminAddProduct />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </div>
 
