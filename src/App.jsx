@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import AdminAddProduct from './pages/AdminAddProduct';
 import ITTalk from './pages/ITTalk';
+import Cart from './pages/Cart';
 import Footer from './components/Footer'
 
 function App() {
@@ -23,7 +24,9 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/register" element={<Register />} />
             <Route path="/admin/add-product" element={<AdminAddProduct />} />
+
             <Route path="/ittalk" element={<ITTalk />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </main>
 
